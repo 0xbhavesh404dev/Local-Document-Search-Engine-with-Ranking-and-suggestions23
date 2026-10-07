@@ -1,0 +1,9 @@
+Information retrieval systems search collections of documents and return relevant information to users.
+
+An inverted index maps terms to documents containing those terms. Exact keyword search can use a hash table for fast average lookup.
+
+Phrase search can use algorithms such as Knuth Morris Pratt and suffix arrays. Document similarity can be calculated using cosine similarity.
+
+References:
+04_database_systems.txt
+08_artificial_intelligence.txt
