@@ -1,0 +1,7 @@
+Graph theory studies vertices and edges and provides algorithms for representing relationships. Graph algorithms include breadth first search, depth first search, shortest paths, and Dijkstra's algorithm.
+
+Graphs can represent relationships between documents, networks, and connected systems.
+
+References:
+05_dijkstra.txt
+06_machine_learning.txt
