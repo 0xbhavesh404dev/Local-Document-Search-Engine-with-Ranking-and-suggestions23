@@ -1,0 +1,52 @@
+                    LOCAL DOCUMENT SEARCH ENGINE
+                              │
+             ┌────────────────┴────────────────┐
+             │                                 │
+       SEARCH ENGINE                    DOCUMENT GRAPH
+             │                                 │
+       ┌─────┴─────┐                    ┌──────┴──────┐
+       │           │                    │             │
+   Keyword      Phrase              Citations    Similarity
+   Search       Search                  │             │
+       │           │                    └──────┬──────┘
+       │       ┌───┴────┐                       │
+       │       │        │                  Weighted Graph
+       │      KMP   Suffix Array               │
+       │       │        │                      ↓
+       │       └───┬────┘                  Dijkstra
+       │           │                           │
+       └─────┐     │                           ↓
+             ↓     ↓                     Shortest Path
+        Search Results                        │
+             │                               ↓
+             └──────────────→ Reading Path
+
+
+
+
+
+
+
+
+
+                           TEXT DOCUMENTS
+                                 ↓
+                          Read Documents
+                                 ↓
+                           Normalize Text
+                                 ↓
+                           Tokenization
+                                 ↓
+                        Stop-word Removal
+                                 ↓
+                          Inverted Index
+                                 ↓
+                     ┌───────────┴───────────┐
+                     ↓                       ↓
+                Keyword Search          Phrase Search
+                     ↓                       ↓
+                  HashMap                   KMP
+                     ↓                       ↓
+              Posting List             Suffix Array
+                     ↓                       ↓
+                 Results                  Snippet
