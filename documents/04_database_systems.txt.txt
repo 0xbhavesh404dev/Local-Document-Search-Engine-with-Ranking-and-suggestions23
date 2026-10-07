@@ -1,0 +1,7 @@
+Database systems store and retrieve structured information. Indexes improve database search performance by reducing unnecessary scanning.
+
+Hash indexes provide fast lookup while tree indexes provide ordered access. Efficient indexing is important when databases contain thousands of records.
+
+References:
+02_data_structures.txt
+07_information_retrieval.txt
