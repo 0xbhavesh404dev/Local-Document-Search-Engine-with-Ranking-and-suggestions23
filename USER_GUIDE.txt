@@ -1,0 +1,78 @@
+LOCAL DOCUMENT SEARCH ENGINE - USER DEMONSTRATION GUIDE
+======================================================
+
+Welcome to the Local Document Search Engine! This application is designed to index text documents in memory and provide rapid keyword searches, exact phrase matching, and conceptual graph traversal.
+
+This guide will walk you through a typical session to demonstrate all the features.
+
+---
+GETTING STARTED
+---
+1. Ensure your documents are placed inside the `documents/` folder as `.txt` files.
+2. Compile and run the application:
+   javac -d bin src/model/*.java src/index/*.java src/graph/*.java src/algorithms/*.java src/*.java
+   java -cp bin Main
+
+---
+DEMO WALKTHROUGH
+---
+
+[ STEP 1: Understand the Data ]
+When the application starts, it will display the Main Menu along with system statistics:
+- Documents loaded (e.g., 8)
+- Unique terms (e.g., 160)
+- Graph nodes (e.g., 8)
+- Graph edges (e.g., 38)
+
+[ STEP 2: Keyword Search (Option 1) ]
+Demonstrate the Inverted Index's O(1) hash lookup.
+- Enter choice: 1
+- Enter keyword: algorithm
+Result: The engine instantly lists documents containing "algorithm", sorted by frequency. Notice how it normalizes capitalization and punctuation automatically.
+
+[ STEP 3: Exact Phrase Search (Option 2) ]
+Demonstrate the KMP and Suffix Array algorithms (O(N+M) and O(M log N)).
+- Enter choice: 2
+- Enter exact phrase: machine learning
+Result: 
+- It first performs Candidate Filtering, narrowing down the search to only documents that contain both "machine" and "learning".
+- It then scans the candidates to find the exact, contiguous phrase.
+- A readable snippet (approx. 20 words) is extracted around the match for context.
+
+*Negative Test*
+- Try searching for: machine algorithms learning
+Result: 0 exact matches. This proves the engine strictly enforces exact phrasing and word order.
+
+[ STEP 4: Conceptual Path (Option 3) ]
+Demonstrate Dijkstra's Shortest Path algorithm on a directed citation graph.
+- Enter choice: 3
+- Enter source document ID: 1 (algorithms)
+- Enter destination document ID: 5 (dijkstra)
+Result: The engine calculates the shortest academic reading path between the two documents using explicit citations and cosine similarities, visualizing it clearly:
+  01_algorithms.txt
+          ↓
+  03_graph_theory.txt
+          ↓
+  05_dijkstra.txt
+
+[ STEP 5: Unreachable Path ]
+- Try Option 3 again with an isolated document if one exists (or a path that goes backwards against a citation).
+- The system will gracefully inform you: "NO PATH FOUND".
+
+[ STEP 6: Document Information (Option 4) ]
+- Enter choice: 4
+- Enter Document ID: 6
+Result: Displays word counts, unique terms, and the current state of its internal Suffix Array. 
+
+[ STEP 7: Index & Graph Statistics (Options 5 & 7) ]
+- Check Option 5 for the total tokens and average document length.
+- Check Option 7 to see how many edges were built strictly from citations (e.g., "References: ...") versus how many were built through Cosine Similarity thresholds (0.20+).
+
+[ STEP 8: Suffix Array Status (Option 6) ]
+- Enter choice: 6
+Result: Suffix arrays are expensive to build, so the engine lazily initializes them only when a document is repeatedly queried for phrases. This menu shows you exactly which documents have cached their suffix arrays for faster subsequent lookups.
+
+---
+EXITING
+---
+Type `0` and press Enter to exit the application.
