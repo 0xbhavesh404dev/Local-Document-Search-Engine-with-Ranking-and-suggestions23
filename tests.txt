@@ -1,0 +1,640 @@
+LOCAL DOCUMENT SEARCH ENGINE
+IMPORTANT PROFESSOR DEMONSTRATION TESTS
+=======================================
+
+Use these tests during the project demonstration.
+
+These are selected to demonstrate the core algorithms,
+data structures, correctness, and real-world usability.
+
+============================================================
+TEST 1 — EXACT KEYWORD SEARCH
+=============================
+
+MENU:
+
+```
+1 → Search keyword
+```
+
+INPUT:
+
+```
+algorithm
+```
+
+EXPECTED:
+
+```
+Found in 3 documents.
+
+03_graph_theory.txt
+05_dijkstra.txt
+06_machine_learning.txt
+```
+
+SHOW THE PROFESSOR:
+
+```
+Keyword
+    ↓
+HashMap
+    ↓
+Inverted Index
+    ↓
+Posting List
+    ↓
+Document IDs + Frequency
+```
+
+KEY POINT:
+
+```
+HashMap provides O(1) average keyword lookup.
+
+Returning k matching documents takes O(k).
+```
+
+============================================================
+TEST 2 — EXACT PHRASE SEARCH + KMP
+==================================
+
+MENU:
+
+```
+2 → Search exact phrase
+```
+
+INPUT:
+
+```
+machine learning
+```
+
+EXPECTED:
+
+```
+06_machine_learning.txt
+08_artificial_intelligence.txt
+```
+
+SHOW THE FLOW:
+
+```
+"machine learning"
+        ↓
+Candidate Filtering
+        ↓
+KMP
+        ↓
+Exact Match
+        ↓
+Snippet
+```
+
+KMP COMPLEXITY:
+
+```
+O(N + M)
+```
+
+============================================================
+TEST 3 — NEGATIVE PHRASE TEST
+=============================
+
+MENU:
+
+```
+2 → Search exact phrase
+```
+
+INPUT:
+
+```
+machine algorithms learning
+```
+
+EXPECTED:
+
+```
+0 exact matches
+```
+
+WHY THIS TEST MATTERS:
+
+The individual words may occur in the documents, but the
+exact sequence does not.
+
+Therefore the search engine must reject the result.
+
+This demonstrates that the system performs TRUE exact
+phrase matching rather than simply checking whether all
+words exist.
+
+SHOW:
+
+```
+Word presence ≠ exact phrase match.
+```
+
+============================================================
+TEST 4 — SUFFIX ARRAY + CACHING
+===============================
+
+MENU:
+
+```
+2 → Search exact phrase
+```
+
+INPUT:
+
+```
+machine learning
+```
+
+Then:
+
+```
+6 → Suffix Array Status
+```
+
+EXPECTED:
+
+```
+06_machine_learning.txt → BUILT
+08_artificial_intelligence.txt → BUILT
+```
+
+Search:
+
+```
+machine learning
+```
+
+again.
+
+Then:
+
+```
+6 → Suffix Array Status
+```
+
+EXPECTED:
+
+```
+Previously built arrays are REUSED.
+```
+
+SHOW THE PROFESSOR:
+
+```
+Frequently accessed document
+        ↓
+Build Suffix Array
+        ↓
+Cache in memory
+        ↓
+Subsequent searches reuse it
+```
+
+SEARCH COMPLEXITY:
+
+```
+O(M log N)
+```
+
+IMPORTANT:
+
+The suffix array must actually be constructed and reused,
+not merely displayed as "BUILT".
+
+============================================================
+TEST 5 — BASIC DIJKSTRA PATH
+============================
+
+MENU:
+
+```
+3 → Find conceptual path
+```
+
+SOURCE:
+
+```
+1
+```
+
+DESTINATION:
+
+```
+5
+```
+
+EXPECTED:
+
+```
+01_algorithms.txt
+        ↓
+03_graph_theory.txt
+        ↓
+05_dijkstra.txt
+```
+
+PATH:
+
+```
+1 → 3 → 5
+```
+
+SHOW THE PROFESSOR:
+
+```
+Document = Node
+
+Citation / Similarity = Edge
+
+Edge = Distance
+
+Dijkstra = Shortest Path
+```
+
+DIJKSTRA COMPLEXITY:
+
+```
+O((V + E) log V)
+```
+
+============================================================
+TEST 6 — LONG CONCEPTUAL PATH
+=============================
+
+MENU:
+
+```
+3 → Find conceptual path
+```
+
+SOURCE:
+
+```
+7
+```
+
+DESTINATION:
+
+```
+5
+```
+
+EXPECTED CITATION-ONLY PATH:
+
+```
+07_information_retrieval.txt
+        ↓
+08_artificial_intelligence.txt
+        ↓
+01_algorithms.txt
+        ↓
+03_graph_theory.txt
+        ↓
+05_dijkstra.txt
+```
+
+PATH:
+
+```
+7 → 8 → 1 → 3 → 5
+```
+
+WHY THIS TEST MATTERS:
+
+This proves that the system can:
+
+```
+• Traverse multiple documents
+• Maintain predecessor information
+• Calculate cumulative distance
+• Reconstruct the complete path
+• Produce a conceptual reading sequence
+```
+
+It is much stronger than demonstrating a direct edge.
+
+============================================================
+TEST 7 — DOCUMENT + INDEX STATISTICS
+====================================
+
+MENU:
+
+```
+4 → Document Information
+```
+
+INPUT:
+
+```
+6
+```
+
+EXPECTED:
+
+```
+06_machine_learning.txt
+```
+
+Show:
+
+```
+• DocID
+• Filename
+• Word count
+• Unique terms
+• Suffix Array status
+```
+
+Then:
+
+```
+5 → Index Statistics
+```
+
+Show:
+
+```
+Documents loaded : 8
+Unique terms     : 160
+Graph nodes      : 8
+Graph edges      : 38
+```
+
+WHY THIS MATTERS:
+
+This demonstrates that the application maintains actual
+in-memory indexes and graph structures rather than performing
+a fresh full-document scan for every operation.
+
+============================================================
+TEST 8 — ERROR / RELIABILITY TEST
+=================================
+
+This is the final quick test.
+
+MENU:
+
+```
+1 → Search keyword
+```
+
+INPUT:
+
+```
+xyznonexistent
+```
+
+EXPECTED:
+
+```
+No documents found.
+```
+
+Then return to the menu.
+
+Optional:
+
+```
+3 → Conceptual Path
+```
+
+Source:
+
+```
+999
+```
+
+EXPECTED:
+
+```
+Invalid document ID.
+```
+
+The application must remain running.
+
+SHOW THE PROFESSOR:
+
+```
+• Invalid input is handled
+• No crash
+• No fake result
+• Application remains usable
+```
+
+============================================================
+RECOMMENDED DEMONSTRATION ORDER
+===============================
+
+Run these in exactly this order:
+
+---
+
+1. KEYWORD SEARCH
+
+   algorithm
+
+Demonstrates:
+
+```
+HashMap + Inverted Index
+
+
+    ↓
+```
+
+2. PHRASE SEARCH
+
+```
+machine learning
+```
+
+Demonstrates:
+
+```
+Candidate Filtering + KMP + Snippet
+
+
+    ↓
+```
+
+3. NEGATIVE PHRASE
+
+```
+machine algorithms learning
+```
+
+Demonstrates:
+
+```
+Exact matching correctness
+
+
+    ↓
+```
+
+4. SUFFIX ARRAY
+
+```
+Search "machine learning" again
+
+Check Option 6
+```
+
+Demonstrates:
+
+```
+Suffix Array construction + caching
+
+
+    ↓
+```
+
+5. DIJKSTRA
+
+```
+Source: 1
+Destination: 5
+```
+
+Demonstrates:
+
+```
+Graph + Dijkstra
+
+
+    ↓
+```
+
+6. LONG PATH
+
+```
+Source: 7
+Destination: 5
+```
+
+Demonstrates:
+
+```
+Multi-hop shortest path + path reconstruction
+
+
+    ↓
+```
+
+7. STATISTICS
+
+```
+Option 5
+```
+
+Demonstrates:
+
+```
+Overall index/graph construction
+
+
+    ↓
+```
+
+8. ERROR HANDLING
+
+```
+xyznonexistent
+```
+
+Demonstrates:
+
+```
+Reliability
+```
+
+============================================================
+WHAT YOU CAN SAY DURING THE DEMO
+================================
+
+KEYWORD SEARCH:
+
+```
+"Instead of scanning all documents for every query,
+I use an inverted index where the keyword is the key
+in a HashMap and the value is its posting list."
+```
+
+PHRASE SEARCH:
+
+```
+"I first intersect the posting lists to reduce the
+candidate documents, then use KMP to verify the exact
+phrase."
+```
+
+SUFFIX ARRAY:
+
+```
+"For frequently accessed documents, I lazily build and
+cache a suffix array so subsequent exact substring
+searches can use binary search."
+```
+
+GRAPH:
+
+```
+"Each document is represented as a node. Citations and
+sufficiently similar documents create weighted edges."
+```
+
+DIJKSTRA:
+
+```
+"The edge weight represents conceptual distance, so
+Dijkstra finds the minimum-distance path between two
+documents and gives us a possible reading progression."
+```
+
+RELIABILITY:
+
+```
+"I also tested invalid queries, nonexistent terms,
+repeated searches, and unreachable paths to ensure the
+system doesn't simply work for the happy path."
+```
+
+============================================================
+CORE CONCEPTS DEMONSTRATED
+==========================
+
+```
+HashMap
+    ↓
+Inverted Index
+    ↓
+KMP
+    ↓
+Suffix Array
+    ↓
+TF-IDF
+    ↓
+Cosine Similarity
+    ↓
+Weighted Graph
+    ↓
+Dijkstra SSSP
+```
+
+FINAL DEMO TARGET:
+
+```
+5–10 minutes
+```
+
+Focus on demonstrating the algorithms through actual
+searches rather than explaining every implementation detail.
+============================================================
