@@ -1,0 +1,7 @@
+Data structures organize and store information so that algorithms can access it efficiently. Arrays, linked lists, trees, hash tables, and graphs are common data structures.
+
+Hash tables provide average constant time lookup for individual keys. Efficient data structures are important in algorithms and computer science.
+
+References:
+03_graph_theory.txt
+04_database_systems.txt

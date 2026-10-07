@@ -1,0 +1,8 @@
+Dijkstra's algorithm solves the single source shortest path problem for graphs with non-negative edge weights.
+
+The algorithm maintains a distance for every vertex and repeatedly selects the vertex with the smallest known distance.
+
+Shortest path algorithms are useful for routing, networks, and finding a conceptual path between related documents.
+
+References:
+06_machine_learning.txt

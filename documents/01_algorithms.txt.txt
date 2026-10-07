@@ -1,0 +1,8 @@
+Algorithms are systematic procedures used to solve computational problems. Algorithms include sorting, searching, graph traversal, dynamic programming, and shortest path techniques.
+
+Machine learning systems also rely on algorithms to process data and produce predictions.
+
+References:
+02_data_structures.txt
+03_graph_theory.txt
+
