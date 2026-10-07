@@ -1,0 +1,10 @@
+Artificial intelligence combines algorithms, data, machine learning, and search techniques to solve complex problems.
+
+Information retrieval allows artificial intelligence systems to find relevant documents. Machine learning can improve document classification and recommendation.
+
+Graph algorithms can also be used to connect related concepts and documents.
+
+References:
+01_algorithms.txt
+06_machine_learning.txt
+07_information_retrieval.txt
